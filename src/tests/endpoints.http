@@ -6,7 +6,7 @@ Content-Type: application/json
     "name": "Ração",
     "code": "555000",
     "amount": 5,
-    "description": "Ração Premier",
+    "description": "Ração Premier"
 }
 
 ###
@@ -17,7 +17,9 @@ GET http://localhost:5000/products
 ### 
 
 # Update amount
-PATCH  http://localhost:5000/products/id
-{
-    "amount": 
-}
+#PATCH  http://localhost:5000/products/id
+#Content-Type: application/json
+
+#{
+#    "amount": 10 
+#}

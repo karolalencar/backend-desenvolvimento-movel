@@ -3,7 +3,7 @@ import mysql from 'mysql2';
 const pool = mysql.createPool({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "mysql",
     database: "aa1_des_movel"
 }).promise();
 
