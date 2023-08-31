@@ -1,7 +1,17 @@
 import express from 'express';
-import { createProduct, retrieveProducts } from '../persistence/productsPersistence.js';
+import { createProduct, retrieveProducts, deleteProduct } from '../persistence/productsPersistence.js';
 
 const router = express.Router();
+
+router.get('/', async (req, res) => {
+    try {
+        const products = await retrieveProducts();
+            return res.json(products);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Error retrieving product');
+    }
+});
 
 router.put('/', async (req, res) => {
     try {
@@ -15,14 +25,16 @@ router.put('/', async (req, res) => {
     }
 });
 
-router.get('/', async (req, res) => {
+router.delete('/:productId', async (req, res) => {
     try {
-        const products = await retrieveProducts();
-            return res.json(products);
+        const productId = req.params.productId;
+        await deleteProduct(productId);
+        res.json({ message: 'Product deleted successfully' });
     } catch (err) {
         console.log(err);
-        res.status(500).send('Error retrieving product');
+        res.status(500).send('Error deleting product');
     }
-})
+});
+
 
 export default router;

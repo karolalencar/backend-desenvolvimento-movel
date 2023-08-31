@@ -2,13 +2,14 @@ import { getPool } from './database.js';
 import { CustomError, CustomErrorType } from '../utils/utils.js';
 import { v4 as uuidv4 } from 'uuid';
 
+const SELECT_ALL_PRODUCTS =
+    `SELECT * FROM products`;
+
 const INSERT_PRODUCT =
     `INSERT INTO products(id, name, code, amount, description)
                  VALUES (UUID_TO_BIN(?), ?, ?, ?, ?)`;
 
-const SELECT_ALL_PRODUCTS =
-    `SELECT * FROM products`;
-
+const DELETE_PRODUCT = `DELETE FROM products WHERE id = UUID_TO_BIN(?)`;
 
 export async function retrieveProducts() {
     try {
@@ -36,6 +37,18 @@ export async function createProduct(product) {
     } catch (err) {
         throw new CustomError(CustomErrorType.DatabaseError,
             'Error creating product', err);
+    }
+}
+
+export async function deleteProduct(productId) {
+    try {
+        await getPool().execute(DELETE_PRODUCT, [productId]);
+    } catch (err) {
+        throw new CustomError(
+            CustomErrorType.DatabaseError,
+            'Error deleting product',
+            err
+        );
     }
 }
 

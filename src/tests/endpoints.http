@@ -1,20 +1,29 @@
-# Add a product
+# GET all products
+GET http://localhost:5000/products
+
+### 
+
+# ADD a new product
 PUT http://localhost:5000/products
 Content-Type: application/json
 
 {
-    "name": "Ração",
-    "code": "555000",
+    "name": "TEST",
+    "code": "15500",
     "amount": 5,
-    "description": "Ração Premier"
+    "description": "Ração"
 }
 
 ###
 
-# Get all products
-GET http://localhost:5000/products
+# DELETE a product
+DELETE http://localhost:5000/products/
+#ae54e68f-883e-4343-8939-68d42a49066a
 
-### 
+
+
+###
+
 
 # Update amount
 #PATCH  http://localhost:5000/products/id
